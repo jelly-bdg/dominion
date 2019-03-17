@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>サプライ生成</title>
+        <style>body {padding: 10px;}</style>
+    </head>
+    <body>
+      <h1>Results</h1>
+      <h2>サプライを表示</h2>
+      <tr>王国カード</tr>
+      {% for card in selectcards %}
+      <div class="card">
+      <tr>
+        <td><a href={{card.6}}>{{card.1}}【{{card.2}}】</a></td>
+        <td>{{card.4}}</td>
+      </tr>
+      </div>
+      {% endfor %}
+      <tr>イベントカード</tr></br>
+      {% for event in selectevents %}
+      <div class="event">
+      <tr>
+        <td><a href={{event.6}}>{{event.1}}【{{event.2}}】</a></td>
+        <td>{{event.4}}</td>
+      </tr>
+      </div>
+      {% endfor %}
+
+      <a href="{% url 'shuffle:index' %}">TOP</a>
+      <a href="{% url 'shuffle:select' %}">拡張の選択</a>
+      <a href="{% url 'shuffle:results' %}">シャッフル</a>
+    </body>
+</html>
