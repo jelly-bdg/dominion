@@ -1,0 +1,15 @@
+<form class="" method="post">
+
+<h2>プレイヤー選択</h2>
+<p><a href="{% url 'domirecord:addplayer' %}">メンバーを追加</a></p>
+{% for p in player %}
+<tr>
+<td class="{{ p.player_onoff }}player">{{p}}</td>
+<td>{{p.player_onoff}}</td>
+{% csrf_token %}
+<td><input type="checkbox" name="select" id="select{{forloop.counter}}" value="{{p.player_name}}"></td>
+</tr>
+<br>
+{% endfor %}
+<input type="submit" name="" value="change">
+</form>

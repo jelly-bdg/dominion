@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset="utf-8">
+    <title>domirecord</title>
+  </head>
+  <body>
+    <h1>TOP</h1>
+    <h2>プレイヤー一覧</h2>
+    {% for men in view.player %}
+      <li>{{men}}</li>
+    {% endfor %}
+    <h2>使う拡張の一覧</h2>
+
+  <ul>
+    {% for package in view.package %}
+        <li>{{ package.package_name }}</li>
+    {% endfor %}
+  </ul>
+
+    <ul>
+      <li><a href="{% url 'domirecord:record' %}">結果一覧</a></li>
+      <li><a href="{% url 'domirecord:player' %}">メンバー登録</a></li>
+      <li><a href="{% url 'domirecord:select' %}">拡張選択</a></li>
+    <li><a href="{% url 'domirecord:gamestart' %}">ゲームスタート</a></li>
+      <li><a href="{% url 'logout' %}">logout</a></li>
+    </ul>
+  </body>
+</html>
