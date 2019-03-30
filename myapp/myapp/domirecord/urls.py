@@ -13,5 +13,5 @@ urlpatterns=[
     path('player/<int:pk>/update/',views.PlayerUpdateView.as_view(),name='player_update'),
     path('player/<int:pk>/delete/',views.PlayerDeleteView.as_view(),name='player_delete'),
     path('card/',views.CardIndexView.as_view(),name='card_list'),
-    path('supply/',views.SupplyIndexView.as_view(),name='supply_list'),
+    path('supply/',views.SupplyIndexView.as_view(),name='supply_index'),
 ]

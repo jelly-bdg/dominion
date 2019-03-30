@@ -5,8 +5,9 @@ from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from random import randint,sample
+from .package_name_list import package_dict_engja,package_name_list_eng
 
-
+#プレイヤー選択
 class Player(models.Model):
     player_name=models.CharField(max_length=100)
     player_onoff=models.BooleanField(default=True)
@@ -19,7 +20,7 @@ class Player(models.Model):
 
     def get_absolute_url(self):
         return reverse('domirecord:player_index')
-
+#カードデータ
 class Card(models.Model):
     card_name=models.CharField(max_length=100)
     cost=models.CharField(max_length=100)
@@ -30,7 +31,7 @@ class Card(models.Model):
     wikilink=models.CharField(max_length=200)
     def __str__(self):
         return self.card_name
-
+    #王国カードの生成用
     def get_supply(self,package_list):
         card_list=[card for card in Card.objects.filter(package__in=package_list)]
         card_number=[i for i in range(len(card_list))]
@@ -40,7 +41,7 @@ class Card(models.Model):
         for number in card_index:
             a.append(card_list[number])
         return a
-
+#イベントデータ
 class Event(models.Model):
     event_name=models.CharField(max_length=100)
     cost=models.CharField(max_length=100)
@@ -51,6 +52,7 @@ class Event(models.Model):
     wikilink=models.CharField(max_length=200)
     def __str__(self):
         return self.event_name
+    #イベントカード生成用
     def get_supply(self,package_list):
         event_list=[event for event in Event.objects.filter(package__in=package_list)]
         event_number=[i for i in range(len(event_list))]
@@ -61,7 +63,7 @@ class Event(models.Model):
         for number in event_index:
             a.append(event_list[number])
         return a
-
+#パッケージ選択
 class Package(models.Model):
     user=models.OneToOneField(
     get_user_model(),
@@ -81,31 +83,25 @@ class Package(models.Model):
     nocturne=models.BooleanField(default=True)
     def __str__(self):
         return self.user.username+' package'
-
+    #update用
     def get_absolute_url(self):
         return reverse('domirecord:index')
-
+    #すべての拡張用
+    def all_package(self):
+        package=Package.objects.values("basic","intrigue","seaside","alchemy","prosperity","cornucopia","hinterlands","darkage","guild","adventures","empires","nocturne").get(user=self.request.user)
+        package_status_dict={}
+        for name in package_name_list_eng:
+            package_status_dict[package_dict_engja[name]]=package.get(name)
+        return package_status_dict
+    #選択した拡張用
     def select_package(self):
         package=Package.objects.values("basic","intrigue","seaside","alchemy","prosperity","cornucopia","hinterlands","darkage","guild","adventures","empires","nocturne").get(user=self.request.user)
         package_list=[]
-        package_name_list_eng=["basic","intrigue","seaside","alchemy","prosperity","cornucopia","hinterlands","darkage","guild","adventures","empires","nocturne"]
-        package_dict_engja={'basic': '基本',
-         'intrigue': '陰謀',
-         'seaside': '海辺',
-         'alchemy': '錬金術',
-         'prosperity': '繁栄',
-         'cornucopia': '収穫祭',
-         'hinterlands': '異郷',
-         'darkage': '暗黒時代',
-         'guild': 'ギルト',
-         'adventures': '冒険',
-         'empires': '帝国',
-         'nocturne': '夜想曲'}
         for name in package_name_list_eng:
             if package.get(name):
                 package_list.append(package_dict_engja[name])
         return package_list
-
+#新しいユーザーが使いされたとき
 @receiver(post_save, sender=get_user_model())
 def create_user_package(sender, instance, created, **kwargs):
     if created:
@@ -115,12 +111,11 @@ def create_user_package(sender, instance, created, **kwargs):
 def save_user_package(sender, instance, **kwargs):
     instance.package.save()
 
-'''
 
 class Result(models.Model):
     supply=models.CharField(max_length=200)
-    player=models.CharField(max_length=200)
     winner=models.CharField(max_length=100)
+    player=models.CharField(max_length=200)
     playornot=models.BooleanField(default=False)
     finish_date=models.DateTimeField(default=timezone.now)
     user=models.ForeignKey(
@@ -128,5 +123,5 @@ class Result(models.Model):
     models.PROTECT
     )
 
-
-'''
+    def __str__(self):
+        return str(self.pk)

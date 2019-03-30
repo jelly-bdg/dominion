@@ -2,4 +2,13 @@
 
 {% block content %}
 <h1>ドミニオン戦績記録</h1>
+<ul>
+    {% if user.is_authenticated %}
+  <li><a href="">戦績</a></li>
+  <li><a href="{% url 'domirecord:player_index' %}">プレイヤー選択</a></li>
+  <li><a href="{% url 'domirecord:package_detail' user.pk %}">パッケージ選択</a></li>
+  {% endif %}
+  <li><a href="{% url 'domirecord:supply_index' %}">サプライ生成</a></li>
+
+</ul>
 {% endblock %}

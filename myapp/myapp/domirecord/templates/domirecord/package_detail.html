@@ -7,54 +7,16 @@
   <th>拡張名</th>
   <th>状態</th>
 </tr>
+{% for key,value in package_status_dict.items %}
 <tr>
-  <td><a href="">基本</a></td>
-  <td>{{package.基本}}</td>
+<td>{{key}}</td>
+<td>{{value}}</td>
 </tr>
-<tr>
-  <td>陰謀</td>
-  <td>{{package.陰謀}}</td>
-</tr>
-<tr>
-  <td>海辺</td>
-  <td>{{package.海辺}}</td>
-</tr>
-<tr>
-  <td>錬金術</td>
-  <td>{{package.錬金術}}</td>
-</tr>
-<tr>
-  <td>繁栄</td>
-  <td>{{package.繁栄}}</td>
-</tr>
-<tr>
-  <td>収穫祭</td>
-  <td>{{package.収穫祭}}</td>
-</tr>
-<tr>
-  <td>異郷</td>
-  <td>{{package.異郷}}</td>
-</tr>
-<tr>
-  <td>暗黒時代</td>
-  <td>{{package.暗黒時代}}</td>
-</tr>
-<tr>
-  <td>ギルド</td>
-  <td>{{package.ギルド}}</td>
-</tr>
-<tr>
-  <td>冒険</td>
-  <td>{{package.冒険}}</td>
-</tr>
-<tr>
-  <td>帝国</td>
-  <td>{{package.帝国}}</td>
-</tr>
-<tr>
-  <td>夜想曲</td>
-  <td>{{package.夜想曲}}</td>
-</tr>
-
-
+{% endfor %}
+</table>
+<div>
+    <a href='JavaScript:history.back()' class="btn btn-primary">&lt; 戻る</a>
+</div>
+<a href="{% url 'domirecord:index' %}" class="btn btn-secondary">ドミニオン</a>
+<a href="{% url 'domirecord:package_update' user.id %}" class="btn btn-secondary">編集</a>
 {% endblock %}
