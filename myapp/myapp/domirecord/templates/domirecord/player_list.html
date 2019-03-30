@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>プレイヤー一覧</h1>
+<table class="table table-striped table-hover">
+  <tr>
+    <th>プレイヤー名</th>
+    <th>状態</th>
+  </tr>
+   {% for player in object_list %}
+   {% if player.user == request.user %}
+
+   <tr>
+      <td><a href="{% url 'domirecord:player_detail' player.pk %}">{{player.player_name}}</a></td>
+      {% if player.player_onoff %}
+      <td>参加中</td>
+      {% else %}
+      <td>不参加中</td>
+      {% endif %}
+    </tr>
+  {% endif %}
+  {% endfor %}
+</table>
+<div class="">
+  <a href="{%url 'domirecord:player_create' %}">新しいプレイヤー</a>
+</div>
+
+ {% endblock %}

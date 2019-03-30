@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>カード一覧</h1>
+<table class="table table-striped table-hover">
+  <tr>
+    <th>プレイヤー名</th>
+  </tr>
+   {% for player in object_list %}
+   {% if player.player_onoff %}
+   <tr>
+      <td>{{player.player_name}}</td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+</table>
+<table class="table table-striped table-hover">
+<tr>
+  <th>王国カード</th>
+  <th>コスト</th>
+  <th>拡張</th>
+</tr>
+  {% for card in card_list %}
+<tr>
+<td><a href="{{card.wikilink}}">{{card.card_name}}</a></td>
+<td>{{card.cost}}</td>
+<td>{{card.package}}</td>
+</tr>
+ {% endfor %}
+ <tr>
+   <th>イベントカード</th>
+   <th>コスト</th>
+   <th>拡張</th>
+ </tr>
+
+ {% for event in event_list %}
+<tr>
+<td>{{event.event_name}}</td>
+<td>{{event.cost}}</td>
+<td>{{event.package}}</td>
+</tr>
+{% endfor %}
+
+
+</table>
+ {% endblock %}

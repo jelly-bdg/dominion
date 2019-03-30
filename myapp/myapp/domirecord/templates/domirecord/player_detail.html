@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>{{player.player_name}}</h1>
+  <div class="">
+      <p>{{player.player_onoff}}</p>
+  </div>
+  <div class="">
+    <a href='{% url "domirecord:player_index"%}'>一覧</a>|
+    <a href="{% url 'domirecord:player_update' player.id %}">編集</a>|
+    <a href="{% url 'domirecord:player_delete' player.id %}">削除</a>
+  </div>
+{% endblock %}

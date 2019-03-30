@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>My Page</h1>
+<ul>
+  <li><a href="{% url  'domirecord:index' %}">ドミニオン</a></li>
+  <li><a href="">実績</a></li>
+  <li><a href="{% url 'domirecord:player_index' %}">プレイヤー登録</a></li>
+  <li><a href="{% url 'logout' %}">ログアウト</a></li>
+</ul>
+{% endblock %}
