@@ -14,4 +14,8 @@ urlpatterns=[
     path('player/<int:pk>/delete/',views.PlayerDeleteView.as_view(),name='player_delete'),
     path('card/',views.CardIndexView.as_view(),name='card_list'),
     path('supply/',views.SupplyIndexView.as_view(),name='supply_index'),
+    path('supply/result/',views.result,name='result_form'),
+    path('result/',views.ResultIndexView.as_view(),name='result_index'),
+    path('result/<int:pk>/',views.ResultDetailView.as_view(),name='result_detail'),
+
 ]

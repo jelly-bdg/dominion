@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <h1>戦績一覧</h1>
+<table class="table table-striped table-hover">
+<tr>
+  <th>対戦</th>
+   {% for player in player_list %}
+  <th>{{player.player_name}}</th>
+    {% endfor %}
+  <th>win</th>
+</tr>
+<ul>
+{% for original in original_list %}
+<tr>
+  <td>{{ forloop.counter }}回戦目</td>
+  {% for player,vp in original.result.items %}
+  <td>{{vp}}VP</td>
+  {% endfor %}
+  <td>{{ original.winner }}</td>
+</tr>
+{% endfor %}
+</table>
+
+ {% endblock %}

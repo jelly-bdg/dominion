@@ -99,7 +99,7 @@ LOGOUT_REDIRECT_URL='/home'
 
 LANGUAGE_CODE = 'ja-JP'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 

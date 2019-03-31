@@ -122,6 +122,7 @@ class Result(models.Model):
     get_user_model(),
     models.PROTECT
     )
-
     def __str__(self):
         return str(self.pk)
+    def get_absolute_url(self):
+        return reverse('domirecord:supply_index')
